@@ -1,0 +1,48 @@
+.custom-graph{
+    align-items: center;
+    justify-content: center;
+    margin-top: 10%;
+}
+.custom-graph-topbar{
+    justify-content: center;
+    align-items: center;
+    column-gap: 1.5rem;
+}
+
+.custom-graph-topbar input{
+    border: none;
+    padding: 8px;
+    border-radius: 10px;
+}
+.error-handler{
+    position: absolute;
+    top: 45%;
+    left: 43%;
+}
+#drone {
+    animation: myDrone 3s linear infinite;
+    transform-origin: bottom;
+    transform-box: fill-box;
+}
+
+@keyframes myDrone {
+    from {
+        translate: 0 1rem ;
+        scale: .8;
+    }
+
+    to {
+        translate: 0 -1rem;
+        scale: .5;
+    }
+}
+
+.error-message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+}
+.error-image{
+    z-index: 1;
+}
