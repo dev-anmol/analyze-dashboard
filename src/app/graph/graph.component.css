@@ -1,7 +1,7 @@
 .custom-graph{
     align-items: center;
     justify-content: center;
-    margin-top: 10%;
+    margin-top: 5%;
 }
 .custom-graph-topbar{
     justify-content: center;
@@ -41,8 +41,4 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: -1;
-}
-.error-image{
-    z-index: 1;
 }
