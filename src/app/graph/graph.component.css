@@ -8,11 +8,17 @@
     align-items: center;
     column-gap: 1.5rem;
 }
+.custom-entry{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 10px;
+}
 
 .custom-graph-topbar input{
     border: none;
     padding: 8px;
-    border-radius: 10px;
+    border-radius: 3%;
 }
 .error-handler{
     position: absolute;

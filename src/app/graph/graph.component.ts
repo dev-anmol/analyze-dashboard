@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import embed, {VisualizationSpec} from 'vega-embed';
+import embed, { VisualizationSpec } from 'vega-embed';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'app-graph',
@@ -14,31 +15,33 @@ import { FormsModule } from '@angular/forms';
 export class GraphComponent implements OnInit {
   id: number = 1;
   isError: boolean = false;
-  isLoading: boolean = false;
+  selectedGraphType: string = 'bar';
+  data: any;
 
-  constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient, private dataService: DataService) { }
 
   ngOnInit(): void {
     this.fetchDataAndRenderGraph();
   }
 
-  fetchDataAndRenderGraph(): void {
-    this.isLoading = true;
-    if (this.id) {
-      this.http.get<any>(`http://localhost:3000/data-energy/${this.id}`).subscribe(
-        (data) => {
-          this.isLoading = false;
-          this.renderGraph(data);
-        },
-        (error) => {
-          console.error('Error fetching data from backend', error);
-          this.isError = true;
-          this.isLoading = false;
-        }
-      );
-    }
+  onGraphTypeChange(): void {
+    this.fetchDataAndRenderGraph();
   }
-  
+
+  fetchDataAndRenderGraph(): void {
+    this.dataService.fetchData(this.id).subscribe(
+      (data) => {
+        this.data = data;
+        this.renderGraph(data);
+      },
+      (error) => {
+        console.error('Error fetching data from backend', error);
+        this.isError = true;
+      }
+    );
+  }
+
   renderGraph(data: any): void {
     const values = [
       { "category": "KW", "amount": data[this.id]?.KW ?? 0 },
@@ -58,7 +61,23 @@ export class GraphComponent implements OnInit {
 
     const validValues = values.filter(item => item.amount !== null && item.amount !== undefined && !isNaN(item.amount));
 
-    const spec: VisualizationSpec = {
+    let spec: VisualizationSpec;
+
+    switch (this.selectedGraphType) {
+      case 'bar':
+        spec = this.getBarChartSpec(validValues);
+        break;
+      case 'line':
+        spec = this.getLineChartSpec(validValues);
+        break;
+      default:
+        spec = this.getBarChartSpec(validValues);
+    }
+    embed('#vega-chart', spec).catch(console.error);
+  }
+
+  getBarChartSpec(values: any[]): VisualizationSpec {
+    return {
       "$schema": "https://vega.github.io/schema/vega/v5.json",
       "width": 900,
       "height": 400,
@@ -67,7 +86,7 @@ export class GraphComponent implements OnInit {
       "data": [
         {
           "name": "table",
-          "values": validValues,
+          "values": values
         }
       ],
       "signals": [
@@ -140,6 +159,70 @@ export class GraphComponent implements OnInit {
         }
       ]
     };
-    embed('#vega-chart', spec).catch(console.error);
   }
+
+  getLineChartSpec(values: any[]): VisualizationSpec {
+    return {
+      "$schema": "https://vega.github.io/schema/vega/v5.json",
+      "width": 900,
+      "height": 400,
+      "padding": 10,
+      "background": "white",
+      "data": [
+        {
+          "name": "table",
+          "values": values
+        }
+      ],
+      "signals": [
+        {
+          "name": "tooltip",
+          "value": {},
+          "on": [
+            { "events": "line:mouseover", "update": "datum" },
+            { "events": "line:mouseout", "update": "{}" }
+          ]
+        }
+      ],
+      "scales": [
+        {
+          "name": "xscale",
+          "type": "point",
+          "domain": { "data": "table", "field": "category" },
+          "range": "width"
+        },
+        {
+          "name": "yscale",
+          "domain": { "data": "table", "field": "amount" },
+          "nice": true,
+          "range": "height"
+        }
+      ],
+      "axes": [
+        { "orient": "bottom", "scale": "xscale" },
+        { "orient": "left", "scale": "yscale" }
+      ],
+      "marks": [
+        {
+          "type": "line",
+          "from": { "data": "table" },
+          "encode": {
+            "enter": {
+              "x": { "scale": "xscale", "field": "category" },
+              "y": { "scale": "yscale", "field": "amount" },
+              "stroke": { "value": "steelblue" },
+              "strokeWidth": { "value": 2 }
+            },
+            "update": {
+              "strokeOpacity": { "value": 1 }
+            },
+            "hover": {
+              "strokeOpacity": { "value": 0.5 }
+            }
+          }
+        }
+      ]
+    };
+  }
+
 }

@@ -1,7 +1,4 @@
 @if (isError) {
-<div *ngIf="isLoading" class="loading-indicator">
-    <div class="spinner"></div>
-</div>
 <div class="container">
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="834.73187"
         height="525.85234" viewBox="0 0 834.73187 525.85234">
@@ -100,8 +97,19 @@
 <h2 class="error-handler">Oops, wrong ID</h2>
 }@else{
 <div class="d-flex custom-graph-topbar">
-    <input type="text" [(ngModel)]="id" placeholder="Enter Device ID">
-    <button class="btn btn-dark" (click)="fetchDataAndRenderGraph()">Click</button>
+    <label for="graphType">Choose graph type:</label>
+    <div class=" d-flex">
+        
+        <select class="form-select" id="graphType" aria-label="Default select example" [(ngModel)]="selectedGraphType"
+            (change)="onGraphTypeChange()">
+            <option value="bar">Bar Chart</option>
+            <option value="line">Line Chart</option>
+        </select>
+    </div>
+    <div class="d-flex custom-entry input-group w-25">
+        <input type="text" class="form-control" placeholder="Enter Device ID" [(ngModel)]="id">
+        <button class="btn btn-dark" type="button" (click)="fetchDataAndRenderGraph()">Button</button>
+    </div>
 </div>
 
 <div class="d-flex custom-graph container-lg">
