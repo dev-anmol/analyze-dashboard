@@ -1,12 +1,8 @@
-.custom-graph{
-    align-items: center;
-    justify-content: center;
-    margin-top: 5%;
-}
 .custom-graph-topbar{
     justify-content: center;
     align-items: center;
     column-gap: 1.5rem;
+    margin-top: 2%;
 }
 .custom-entry{
     display: flex;
@@ -47,4 +43,37 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#vega-chart{
+    align-self: flex-end;
+}
+
+.custom-graph{
+    justify-content: flex-end;
+    margin-top: 3%;
+    margin-right: 4%;
+}
+.row1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.row1 p {
+    width: 70%;
+    text-align: center;
+}
+.date-range{
+    text-align: center;
+    display: inline-block;
+    height: fit-content;
+    position: relative;
+    top: 5px;
+}
+.dates-label{
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    height: fit-content;
+    top: 5px;
 }

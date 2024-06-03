@@ -4,11 +4,12 @@ import embed, { VisualizationSpec } from 'vega-embed';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../data.service';
+import { SidebarComponent } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-graph',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, SidebarComponent],
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.css']
 })
@@ -17,12 +18,15 @@ export class GraphComponent implements OnInit {
   isError: boolean = false;
   selectedGraphType: string = 'bar';
   data: any;
+  startDate:any;
+  endDate:any;
 
 
   constructor(private http: HttpClient, private dataService: DataService) { }
 
   ngOnInit(): void {
     this.fetchDataAndRenderGraph();
+
   }
 
   onGraphTypeChange(): void {

@@ -1,0 +1,19 @@
+.analyze{
+    text-decoration: none;
+    color: white;
+    background-color: rgb(62, 61, 61);
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    width: 70%;
+    text-align: center;
+}
+
+.analyze:hover{
+    background-color: rgb(102, 102, 102);
+}
+
+.section-container{
+    display: flex;
+    justify-content: center;
+}

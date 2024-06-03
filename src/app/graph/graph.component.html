@@ -96,23 +96,164 @@
 
 <h2 class="error-handler">Oops, wrong ID</h2>
 }@else{
-<div class="d-flex custom-graph-topbar">
-    <label for="graphType">Choose graph type:</label>
-    <div class=" d-flex">
-        
-        <select class="form-select" id="graphType" aria-label="Default select example" [(ngModel)]="selectedGraphType"
-            (change)="onGraphTypeChange()">
-            <option value="bar">Bar Chart</option>
-            <option value="line">Line Chart</option>
-        </select>
-    </div>
-    <div class="d-flex custom-entry input-group w-25">
-        <input type="text" class="form-control" placeholder="Enter Device ID" [(ngModel)]="id">
-        <button class="btn btn-dark" type="button" (click)="fetchDataAndRenderGraph()">Button</button>
+<div class="container-fluid">
+    <div class="row">
+        <div class="row row1 w-100 mt-lg-3">
+            <p>
+                Last = Includes present Day/Week/Month/Year. Previous = Doesn't include present Day/Week/Month/Year.
+            </p>
+        </div>
+        <div class="col-md-3">
+            <div class="row">
+                <div class="col-sm-12">
+                    <label class="label-with-select-dropdown">View</label>
+                    <div>
+                        <select class="sub-content form-control">
+                            <option value="" style="display:none;" class="" selected="selected">Select</option>
+                            <option label="A - View">A - View</option>
+                            <option label="TRH">TRH</option>
+                            <option label="test">test</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <div style="margin-top: 20px;color:  #333232;">
+                        <p style="text-align:center"> ------------OR------------ </p>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <label class="label-with-select-dropdown">Analysis Type</label>
+                    <div>
+                        <select class="sub-content form-control">
+                            <option value="" style="display:none;" class="" selected="selected">Select
+                            </option>
+                            <option label="General" value="string:G" selected="selected">General</option>
+                            <option label="Time vs Time" value="string:T">Time vs Time</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-12" style="margin-top: 15px;">
+                    <label class="label-with-select-dropdown">Compare by</label>
+                    <div>
+                        <select class="sub-content form-control">
+                            <option value="" style="display:none;" class="" selected="selected">Select
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-12" style="margin-top: 15px;">
+                    <label class="label-with-select-dropdown">Plot By</label>
+                    <div>
+                        <select class="sub-content form-control" disabled>
+                            <option value="" style="display:none;" class="" selected="selected">Select
+                            </option>
+                            <option label="Day" selected="selected">Day</option>
+                            <option label="Hour">Hour</option>
+                            <option label="15 Minutes">15 Minutes</option>
+                            <option label="Live" selected="selected">Live</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-sm-2 d-flex justify-content-end align-content-center">
+                            <label class="label-with-select-dropdown date-range">Date Range</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="sub-content form-control ng-pristine ng-untouched ng-valid ng-not-empty"
+                                ng-model="analysis.DateRangeType"
+                                ng-options="dateType as dateType for dateType in allDateTypes"
+                                ng-disabled="disabled || analysis.IsAdminCreate || analysis.dateType.Id == 9 || analysis.dateType.Type == 'C'"
+                                ng-change="dateTypeChanged(1)">
+                                <option value="" style="display:none;" class="" selected="selected">Select</option>
+                                <option label="Last" value="string:Last" selected="selected">Last</option>
+                                <option label="Previous" value="string:Previous">Previous</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="sub-content form-control ng-pristine ng-untouched ng-valid ng-not-empty"
+                                ng-model="analysis.DateRangeValue"
+                                ng-options="dateValue as dateValue for dateValue in dateValues"
+                                ng-disabled="disabled || analysis.IsAdminCreate || analysis.dateType.Id == 9 || analysis.dateType.Type == 'C'"
+                                ng-change="dateTypeChanged(1)">
+                                <option value="" style="display:none;" class="" selected="selected">Select</option>
+                                <option label="1" value="number:1" selected="selected">1</option>
+                                <option label="2" value="number:2">2</option>
+                                <option label="3" value="number:3">3</option>
+                                <option label="4" value="number:4">4</option>
+                                <option label="5" value="number:5">5</option>
+                                <option label="6" value="number:6">6</option>
+                                <option label="7" value="number:7">7</option>
+                                <option label="8" value="number:8">8</option>
+                                <option label="9" value="number:9">9</option>
+                                <option label="10" value="number:10">10</option>
+                                <option label="11" value="number:11">11</option>
+                                <option label="12" value="number:12">12</option>
+                                <option label="15" value="number:15">15</option>
+                                <option label="20" value="number:20">20</option>
+                                <option label="25" value="number:25">25</option>
+                                <option label="30" value="number:30">30</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="sub-content form-control ng-pristine ng-untouched ng-valid ng-not-empty"
+                                ng-model="analysis.dateType"
+                                ng-options="dateType as dateType.Name for dateType in dateTypes"
+                                ng-disabled="disabled || analysis.IsAdminCreate" ng-change="dateTypeChanged(1)">
+                                <option value="" style="display:none;" class="" selected="selected">Select</option>
+                                <option label="Live" value="object:3020">Live</option>
+                                <option label="Day" value="object:3021">Day</option>
+                                <option label="Week" value="object:3019" selected="selected">Week</option>
+                                <option label="Month" value="object:3022">Month</option>
+                                <option label="Year" value="object:3023">Year</option>
+                                <option label="Custom Range" value="object:3024">Custom Range</option>
+                            </select>
+                        </div>
+
+                        <div class="row mt-lg-4">
+                            <div class="col-sm-2 d-flex justify-content-end">
+                                <label class="dates-label">Start Month</label>
+                            </div>
+                            <div class="col-sm-3 d-flex justify-content-start input-container">
+                                <input type="date" class="form-control" [(ngModel)]="startDate">
+                            </div>
+                            <div class="col-sm-1"></div>
+                            <div class="col-sm-2 d-flex justify-content-end">
+                                <label class="dates-label">End Month</label>
+                            </div>
+                            <div class="col-sm-3 d-flex justify-content-start input-container">
+                                <input type="date" class="form-control" [(ngModel)]="endDate">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="d-flex custom-graph-topbar">
+                <label for="graphType">Choose graph type:</label>
+                <div class=" d-flex">
+                    <select class="form-select" id="graphType" aria-label="Default select example"
+                        [(ngModel)]="selectedGraphType" (change)="onGraphTypeChange()">
+                        <option value="bar">Bar Chart</option>
+                        <option value="line">Line Chart</option>
+                    </select>
+                </div>
+                <div class="d-flex custom-entry input-group w-25">
+                    <input type="text" class="form-control" placeholder="Enter Device ID" [(ngModel)]="id">
+                    <button class="btn btn-dark" type="button" (click)="fetchDataAndRenderGraph()">Submit</button>
+                </div>
+            </div>
+            <div class="d-flex custom-graph vega-container">
+                <div id="vega-chart"></div>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="d-flex custom-graph container-lg">
-    <div id="vega-chart"></div>
-</div>
 }
