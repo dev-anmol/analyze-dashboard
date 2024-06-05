@@ -4,11 +4,13 @@ import { HeaderComponent } from './header/header.component';
 import { BodyComponent } from './body/body.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { DialogContentComponent } from './dialog-content/dialog-content.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, BodyComponent, HttpClientModule, SidebarComponent],
+  imports: [RouterOutlet, HeaderComponent, BodyComponent, HttpClientModule, SidebarComponent, ModalModule, DialogContentComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

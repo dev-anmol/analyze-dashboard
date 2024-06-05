@@ -5,11 +5,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DataService } from '../data.service';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { DialogContentComponent } from '../dialog-content/dialog-content.component';
+
 
 @Component({
   selector: 'app-graph',
   standalone: true,
-  imports: [CommonModule, FormsModule, SidebarComponent],
+  imports: [CommonModule, FormsModule, SidebarComponent, NgMultiSelectDropDownModule, MatDialogModule, DialogContentComponent],
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.css']
 })
@@ -18,15 +23,47 @@ export class GraphComponent implements OnInit {
   isError: boolean = false;
   selectedGraphType: string = 'bar';
   data: any;
-  startDate:any;
-  endDate:any;
+  startDate: any;
+  endDate: any;
+  hours = Array.from({ length: 24 }, (_, i) => ({ id: i, item_text: i.toString() }));
+  selectedHours: any[] = [];
 
 
-  constructor(private http: HttpClient, private dataService: DataService) { }
+
+  constructor(private http: HttpClient, private dataService: DataService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.fetchDataAndRenderGraph();
+  }
+  openDialog(){
+    const dialogRef = this.dialog.open(DialogContentComponent);
 
+    dialogRef.afterClosed().subscribe(result=>{
+      console.log(`Dialog result : ${result}`);
+    });
+  }
+
+
+  dropdownSettings: IDropdownSettings = {
+    singleSelection: false,
+    idField: 'id',
+    textField: 'item_text',
+    selectAllText: 'Select All',
+    unSelectAllText: 'Unselect All',
+    itemsShowLimit: 24,
+    allowSearchFilter: true
+  };
+
+  onSelectHours(item: any) {
+    console.log('Selected:', item);
+  }
+
+  onDeselectHours(item: any) {
+    console.log('Deselected:', item);
+  }
+
+  onFilterChange(item: any) {
+    console.log('Filter:', item);
   }
 
   onGraphTypeChange(): void {

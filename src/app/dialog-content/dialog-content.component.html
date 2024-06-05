@@ -1,0 +1,169 @@
+<div class="container-fluid custom-dialog modal-content">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2 mat-dialog-title>Add</h2>
+    </div>
+    <mat-dialog-content class="mat-typography p-2 m-lg-2">
+
+      <div class="row top-row">
+        <div class="col-sm-3 d-flex align-content-center">
+          <input type="radio" class="form-check-input m-lg-2" name="select" id="Parameter"
+            (click)="changeValue($event, 'Parameter')" checked>
+          <label for="Parameter" class="p-1">Parameter</label>
+        </div>
+        <div class="col-sm-3 d-flex align-content-center">
+          <input type="radio" class="form-check-input m-lg-2" name="select" id="Benchmark"
+            (click)="changeValue($event, 'Benchmark')">
+          <label for="Benchmark" class="p-1">Benchmark Comparison</label>
+        </div>
+        <div class="col-sm-3 d-flex align-content-center">
+          <input type="radio" class="form-check-input m-lg-2" id="Spend" name="select"
+            (click)="changeValue($event, 'Spend')">
+          <label for="Spend" class="p-1">Spend</label>
+        </div>
+        <div class="col-sm-3 d-flex align-content-center">
+          <input type="radio" class="form-check-input m-lg-2" id="KPI" name="select"
+            (click)="changeValue($event, 'KPI')">
+          <label for="KPI" class="p-1">KPI</label>
+        </div>
+      </div>
+
+      @if(radioValue=='Parameter'){
+      <div class="col-sm-12">
+        <div class="col-sm-12">
+          <label>Facility</label>
+          <select class="form-select">
+            <option value="" class="" selected="selected">Select</option>
+            <option label="Test Facility" value="number:1">Test Facility</option>
+          </select>
+        </div>
+        <div class="col-sm-12 mt-3">
+          <label>Device</label>
+          <select class="form-select">
+            <option value="" class="" selected="selected">Select</option>
+            <input type="text" class="form-check-input">
+          </select>
+        </div>
+        <div class="col-sm-12 mt-3">
+          <label>Parameter</label>
+          <ng-multiselect-dropdown placeholder="select Parameter" [settings]="dropdownsettings" [data]="finalParameters">
+
+          </ng-multiselect-dropdown>
+        </div>
+        <div class="col-sm-12 mt-3">
+          <label>Graph Type</label>
+          <select class="form-select">
+            <option value="" class="" selected="selected">Select</option>
+            <option value="">Line</option>
+            <option value="">Area</option>
+            <option value="">Bar</option>
+            <option value="">Pie</option>
+            <option value="">Donut</option>
+            <option value="">Heatmap</option>
+          </select>
+        </div>
+        <div class="col-sm-12 mt-3">
+          <label for="">Plot Axis</label>
+          <select name="" id="" class="form-select">
+            <option value="">Primary Y (Y1)</option>
+            <option value="">Secondary Y (Y2)</option>
+          </select>
+        </div>
+      </div>
+      }@else if (radioValue==='Benchmark') {
+      <div class="col-sm-12">
+        <div class="col-sm-12">
+          <label>Facility</label>
+          <select class="form-select">
+            <option value="" class="" selected="selected">Select</option>
+            <option label="Test Facility" value="number:1">Test Facility</option>
+          </select>
+        </div>
+        <div class="col-sm-12 mt-3">
+          <label>Device</label>
+          <select class="form-select">
+            <option value="" class="" selected="selected">Select</option>
+            <input type="text" class="form-check-input">
+          </select>
+        </div>
+        <div class="col-sm-12 mt-3">
+          <label>Benchmark (ploted as line graph)</label>
+          <select class="form-select">
+            <option value="" class="" selected="selected">Select</option>
+            <input type="text" class="form-check-input">
+          </select>
+        </div>
+        <div class="col-sm-12 mt-3">
+          <label for="">Benchmark Plot Axis</label>
+          <select name="" id="" class="form-select">
+            <option value="">Primary Y (Y1)</option>
+            <option value="">Secondary Y (Y2)</option>
+          </select>
+        </div>
+      </div>
+      }@else if (radioValue==='Spend') {
+      <div class="col-sm-12">
+        <div class="col-sm-12">
+          <label>Facility</label>
+          <select class="form-select">
+            <option value="" class="" selected="selected">Select</option>
+            <option label="Test Facility" value="number:1">Test Facility</option>
+          </select>
+        </div>
+        <div class="col-sm-12 mt-3">
+          <label>Device</label>
+          <select class="form-select">
+            <option value="" class="" selected="selected">Select</option>
+            <input type="text" class="form-check-input">
+          </select>
+        </div>
+        <div class="col-sm-12 mt-3">
+          <label>Parameter</label>
+          <select class="form-select">
+            <option value="" class="" selected="selected">Select</option>
+            <input type="text" class="form-check-input">
+          </select>
+        </div>
+        <div class="col-sm-12 mt-3">
+          <label>Graph Type</label>
+          <select class="form-select">
+            <option value="" class="" selected="selected">Select</option>
+            <option value="">Line</option>
+            <option value="">Area</option>
+            <option value="">Bar</option>
+            <option value="">Pie</option>
+            <option value="">Donut</option>
+            <option value="">Heatmap</option>
+          </select>
+        </div>
+        <div class="col-sm-12 mt-3">
+          <label for="">Plot Axis</label>
+          <select name="" id="" class="form-select">
+            <option value="">Primary Y (Y1)</option>
+            <option value="">Secondary Y (Y2)</option>
+          </select>
+        </div>
+      </div>
+      }@else if (radioValue==='KPI') {
+      <div class="col-sm-12">
+        <label>Facility</label>
+        <select class="form-select">
+          <option value="" class="" selected="selected">Select</option>
+          <option label="Test Facility" value="number:1">Test Facility</option>
+        </select>
+      </div>
+      <div class="col-sm-12">
+        <label>KPI</label>
+        <select class="form-select">
+          <option value="" class="" selected="selected">Select</option>
+        </select>
+      </div>
+      }
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close class="btn btn-dark m-2">Cancel</button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn btn-primary">Add</button>
+    </mat-dialog-actions>
+
+  </div>
+</div>

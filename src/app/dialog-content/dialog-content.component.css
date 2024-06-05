@@ -1,0 +1,23 @@
+.custom-dialog{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 700px;
+}
+
+.cdk-global-overlay-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.top-row label{
+    display: inline-block;
+    height: fit-content;
+}
+
+mat-dialog-content{
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
