@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import embed, { VisualizationSpec } from 'vega-embed';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +8,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogContentComponent } from '../dialog-content/dialog-content.component';
+import {FormService} from '../form.service';
+
 
 
 @Component({
@@ -27,10 +28,17 @@ export class GraphComponent implements OnInit {
   endDate: any;
   hours = Array.from({ length: 24 }, (_, i) => ({ id: i, item_text: i.toString() }));
   selectedHours: any[] = [];
+  view:any;
+  AnalysisType:any;
+  CompareBy:any;
+  PlotBy:any;
+  DateRange:any;
+  Day:any;
+  DataOption:any;
+  StartMonth:any;
+  EndMonth:any;
 
-
-
-  constructor(private http: HttpClient, private dataService: DataService, public dialog: MatDialog) { }
+  constructor(private dataService: DataService, public dialog: MatDialog, private formDataService: FormService) { }
 
   ngOnInit(): void {
     this.fetchDataAndRenderGraph();
@@ -55,16 +63,29 @@ export class GraphComponent implements OnInit {
   };
 
   onSelectHours(item: any) {
-    console.log('Selected:', item);
+    // console.log('Selected:', item);
   }
 
   onDeselectHours(item: any) {
-    console.log('Deselected:', item);
+    // console.log('Deselected:', item);
   }
 
   onFilterChange(item: any) {
-    console.log('Filter:', item);
+    // console.log('Filter:', item);
   }
+
+  updateFormData(field: string, value:any){
+    const formData = this.formDataService.getFormData();
+
+    if(Array.isArray(value)){
+      formData[field] = value;
+    }
+    else{
+      formData[field] = value;
+    }
+    this.formDataService.setFormData(formData);
+  }
+
 
   onGraphTypeChange(): void {
     this.fetchDataAndRenderGraph();

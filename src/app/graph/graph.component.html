@@ -108,8 +108,8 @@
                 <div class="col-sm-12">
                     <label>View</label>
                     <div>
-                        <select class="sub-content form-control">
-                            <option value="" style="display:none;" class="" selected="selected">Select</option>
+                        <select class="sub-content form-control" [(ngModel)]="view"
+                            (change)="updateFormData('View', view)">
                             <option label="A - View">A - View</option>
                             <option label="TRH">TRH</option>
                             <option label="test">test</option>
@@ -124,7 +124,8 @@
                 <div class="col-sm-12">
                     <label>Analysis Type</label>
                     <div>
-                        <select class="form-control">
+                        <select class="form-control" [(ngModel)]="AnalysisType"
+                            (change)="updateFormData('Analysis Type', AnalysisType)">
                             <option value="" style="display:none;" class="" selected="selected">Select
                             </option>
                             <option label="General" value="string:G" selected="selected">General</option>
@@ -135,7 +136,8 @@
                 <div class="col-sm-12" style="margin-top: 15px;">
                     <label>Compare by</label>
                     <div>
-                        <select class="sub-content form-control">
+                        <select class="sub-content form-control" [(ngModel)]="CompareBy"
+                            (change)="updateFormData('Compare by', CompareBy)">
                             <option value="" style="display:none;" class="" selected="selected">Select
                             </option>
                             <option label="Day" selected="selected">Day</option>
@@ -145,7 +147,8 @@
                 <div class="col-sm-12" style="margin-top: 15px;">
                     <label>Plot By</label>
                     <div>
-                        <select class="sub-content form-control">
+                        <select class="sub-content form-control" [(ngModel)]="PlotBy"
+                            (change)="updateFormData('Plot By', PlotBy)">
                             <option value="" style="display:none;" class="" selected="selected">Select
                             </option>
                             <option label="Day" selected="selected">Day</option>
@@ -158,8 +161,9 @@
                 <div class="col-sm-12" style="margin-top: 15px;">
                     <label>Select Hours</label>
                     <div class="bg-white rounded-3">
-                        <ng-multiselect-dropdown [placeholder]="'Select Hours'" [settings]="dropdownSettings"
-                            [data]="hours" [(ngModel)]="selectedHours" (onSelect)="onSelectHours($event)"
+                        <ng-multiselect-dropdown (ngModelChange)="updateFormData('selectedHours', $event)"
+                            [placeholder]="'Select Hours'" [settings]="dropdownSettings" [data]="hours"
+                            [(ngModel)]="selectedHours" (onSelect)="onSelectHours($event)"
                             (onDeSelect)="onDeselectHours($event)" (onFilterChange)="onFilterChange($event)">
                         </ng-multiselect-dropdown>
                     </div>
@@ -182,7 +186,8 @@
                             </label>
                         </div>
                         <div class="col-sm-12">
-                            <button style="float: right;cursor: pointer;" class="btn btn-primary" (click)="openDialog()">
+                            <button style="float: right;cursor: pointer;" class="btn btn-primary"
+                                (click)="openDialog()">
                                 Add
                             </button>
                         </div>
@@ -203,14 +208,16 @@
                             <label class="date-range">Date Range</label>
                         </div>
                         <div class="col-sm-3">
-                            <select class="form-control">
+                            <select class="form-control" [(ngModel)]="DateRange"
+                                (change)="updateFormData('Date Range', DateRange)">
                                 <option value="" style="display:none;" class="" selected="selected">Select</option>
                                 <option label="Last" value="string:Last" selected="selected">Last</option>
                                 <option label="Previous" value="string:Previous">Previous</option>
                             </select>
                         </div>
                         <div class="col-sm-3">
-                            <select class="sub-content form-control">
+                            <select class="sub-content form-control" [(ngModel)]='Day'
+                                (change)="updateFormData('Day', Day )">
                                 <option value="" style="display:none;" class="" selected="selected">Select</option>
                                 <option label="1" value="number:1" selected="selected">1</option>
                                 <option label="2" value="number:2">2</option>
@@ -231,7 +238,7 @@
                             </select>
                         </div>
                         <div class="col-sm-3">
-                            <select class="sub-content form-control">
+                            <select class="sub-content form-control" [(ngModel)]="DataOption" (change)="updateFormData('Data Type', DataOption)">
                                 <option value="" style="display:none;" class="" selected="selected">Select</option>
                                 <option label="Live">Live</option>
                                 <option label="Day">Day</option>
@@ -247,14 +254,14 @@
                                 <label class="dates-label">Start Month</label>
                             </div>
                             <div class="col-sm-3 d-flex justify-content-start input-container">
-                                <input type="date" class="form-control form-select" [(ngModel)]="startDate">
+                                <input type="date" class="form-control form-select" [(ngModel)]="StartMonth" (change)="updateFormData('Start Month', StartMonth)">
                             </div>
                             <div class="col-sm-1"></div>
                             <div class="col-sm-2 d-flex justify-content-end">
                                 <label class="dates-label">End Month</label>
                             </div>
                             <div class="col-sm-3 d-flex justify-content-start input-container">
-                                <input type="date" class="form-control form-select" [(ngModel)]="endDate">
+                                <input type="date" class="form-control form-select" [(ngModel)]="EndMonth" (change)="updateFormData('End Month', EndMonth)">
                             </div>
                         </div>
                     </div>
