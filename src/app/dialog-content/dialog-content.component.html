@@ -32,8 +32,7 @@
       <div class="col-sm-12">
         <div class="col-sm-12">
           <label>Facility</label>
-          <select class="form-select" [(ngModel)]="PFacility"
-            (change)="updateFormData('Facility', PFacility)">
+          <select class="form-select" [(ngModel)]="PFacility" (change)="updateFormData('Facility', PFacility)">
             <option value="" class="" selected="selected">Select</option>
             <option label="Test Facility" value="number:1">Test Facility</option>
           </select>
@@ -47,13 +46,8 @@
         </div>
         <div class="col-sm-12 mt-3">
           <label>Parameter</label>
-          <ng-multiselect-dropdown
-          placeholder="select Parameter" 
-          [settings]="dropdownsettings"
-          [data]="finalParameters"
-          [(ngModel)]= 'selectedParameter'
-          (ngModelChange)="updateFormData('selectedParameter',$event)"
-          >
+          <ng-multiselect-dropdown placeholder="select Parameter" [settings]="dropdownsettings" [data]="finalParameters"
+            [(ngModel)]='selectedParameter' (ngModelChange)="updateFormData('selectedParameter',$event)">
           </ng-multiselect-dropdown>
         </div>
         <div class="col-sm-12 mt-3">
@@ -70,7 +64,8 @@
         </div>
         <div class="col-sm-12 mt-3">
           <label for="">Plot Axis</label>
-          <select name="" id="" class="form-select" [(ngModel)]="PPlotAxis" (change)="updateFormData('Plot Axis', PPlotAxis)">
+          <select name="" id="" class="form-select" [(ngModel)]="PPlotAxis"
+            (change)="updateFormData('Plot Axis', PPlotAxis)">
             <option value="" style="display:none;" class="" selected="selected">Select</option>
             <option value="Primary Y (Y1)">Primary Y (Y1)</option>
             <option value="Secondary Y (Y2)">Secondary Y (Y2)</option>
@@ -102,7 +97,8 @@
         </div>
         <div class="col-sm-12 mt-3">
           <label for="">Benchmark Plot Axis</label>
-          <select name="" id="" class="form-select" [(ngModel)]="BPlotAxis" (change)="updateFormData('Benchmark PA', BPlotAxis)">
+          <select name="" id="" class="form-select" [(ngModel)]="BPlotAxis"
+            (change)="updateFormData('Benchmark PA', BPlotAxis)">
             <option value="Primary Y (Y1)">Primary Y (Y1)</option>
             <option value="Secondary Y (Y2)">Secondary Y (Y2)</option>
           </select>
@@ -113,7 +109,7 @@
         <div class="col-sm-12">
           <label>Facility</label>
           <select class="form-select" [(ngModel)]="SFacility" (change)="updateFormData('Facility', SFacility)">
-            <option value="" class="" style="display: none;"  selected="selected">Select</option>
+            <option value="" class="" style="display: none;" selected="selected">Select</option>
             <option label="Test Facility" value="number:1">Test Facility</option>
           </select>
         </div>
@@ -145,7 +141,8 @@
         </div>
         <div class="col-sm-12 mt-3">
           <label for="">Plot Axis</label>
-          <select name="" id="" class="form-select" [(ngModel)]="SPlotAxis" (change)="updateFormData('Plot Axis', SPlotAxis)">
+          <select name="" id="" class="form-select" [(ngModel)]="SPlotAxis"
+            (change)="updateFormData('Plot Axis', SPlotAxis)">
             <option value="Primary Y (Y1)">Primary Y (Y1)</option>
             <option value="Secondary Y (Y2)">Secondary Y (Y2)</option>
           </select>
@@ -167,9 +164,14 @@
       </div>
       }
     </mat-dialog-content>
-    <mat-dialog-actions align="end">
-      <button mat-button mat-dialog-close class="btn btn-dark m-2">Cancel</button>
-      <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn btn-primary">Add</button>
+    <mat-dialog-actions align="end" class="d-flex w-100 justify-content-between align-items-center">
+      <button class="noselect" id="cancelBtn" mat-button mat-dialog-close><span class="text">Cancel</span><span class="icon"><svg
+            xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path
+              d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z">
+            </path>
+          </svg></span></button>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial class="btn btn-primary" id="addBtn">Add</button>
     </mat-dialog-actions>
 
   </div>

@@ -78,8 +78,6 @@ export class DialogContentComponent {
 
 
   changeValue(event: any, value: string) {
-    console.log(event.target.value);
     this.radioValue = value;
-    console.log(this.radioValue);
   }
 }

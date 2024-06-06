@@ -8,6 +8,10 @@ body {
 	height: 100vh;
     font-family: sans-serif;
 }
+html{
+	width: 100%;
+	height: 100%;
+}
 
 @keyframes gradient {
 	0% {

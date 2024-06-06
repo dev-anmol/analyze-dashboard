@@ -23,7 +23,6 @@ export class FormService {
   getFormData(): FormData {
     console.log(this.formData);
     this.formData.forEach((item)=>{
-      console.log(item);
     })
     return this.formDataSource.getValue();
   }

@@ -8,14 +8,13 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogContentComponent } from '../dialog-content/dialog-content.component';
-import {FormService} from '../form.service';
-
-
+import { FormService } from '../form.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-graph',
   standalone: true,
-  imports: [CommonModule, FormsModule, SidebarComponent, NgMultiSelectDropDownModule, MatDialogModule, DialogContentComponent],
+  imports: [CommonModule, FormsModule, SidebarComponent, NgMultiSelectDropDownModule, MatDialogModule, DialogContentComponent,],
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.css']
 })
@@ -24,29 +23,41 @@ export class GraphComponent implements OnInit {
   isError: boolean = false;
   selectedGraphType: string = 'bar';
   data: any;
+  formDataRes: any;
   startDate: any;
   endDate: any;
   hours = Array.from({ length: 24 }, (_, i) => ({ id: i, item_text: i.toString() }));
   selectedHours: any[] = [];
-  view:any;
-  AnalysisType:any;
-  CompareBy:any;
-  PlotBy:any;
-  DateRange:any;
-  Day:any;
-  DataOption:any;
-  StartMonth:any;
-  EndMonth:any;
-
+  view: any;
+  AnalysisType: any;
+  CompareBy: any;
+  PlotBy: any;
+  DateRange: any;
+  Day: any;
+  DataOption: any;
+  StartMonth: any;
+  EndMonth: any;
   constructor(private dataService: DataService, public dialog: MatDialog, private formDataService: FormService) { }
 
   ngOnInit(): void {
     this.fetchDataAndRenderGraph();
   }
-  openDialog(){
+  resetFields() {
+    this.selectedHours = [];
+    this.view = '';
+    this.AnalysisType = '';
+    this.CompareBy = '';
+    this.PlotBy = '';
+    this.DateRange = '';
+    this.Day = '';
+    this.DataOption = '';
+    this.StartMonth = '';
+    this.EndMonth = '';
+  }
+  openDialog() {
     const dialogRef = this.dialog.open(DialogContentComponent);
 
-    dialogRef.afterClosed().subscribe(result=>{
+    dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result : ${result}`);
     });
   }
@@ -74,13 +85,21 @@ export class GraphComponent implements OnInit {
     // console.log('Filter:', item);
   }
 
-  updateFormData(field: string, value:any){
+  updateFormData(field: string, value: any) {
     const formData = this.formDataService.getFormData();
 
-    if(Array.isArray(value)){
+    if (field === 'startMonth') {
+      const formattedDate = formatDate(value, 'dd/MM/yyyy', 'en-US');
+      formData[field] = formattedDate;
+    }
+    else if (field === 'endMonth') {
+      const formattedDate = formatDate(value, 'dd/MM/yyyy', 'en-US');
+      formData[field] = formattedDate;
+
+    } else if (Array.isArray(value)) {
       formData[field] = value;
     }
-    else{
+    else {
       formData[field] = value;
     }
     this.formDataService.setFormData(formData);
@@ -102,6 +121,24 @@ export class GraphComponent implements OnInit {
         this.isError = true;
       }
     );
+    // const formData = {...this.formDataService.getFormData()};
+    // this.dataService.sendRequestWithFormData(formData).subscribe(
+    //   (data) => {
+    //     this.formDataRes = data;
+    //     console.log(this.formDataRes);        
+    //   } 
+    // )
+    this.resetFields();
+  }
+  fetchFormData(): void {
+    const formData = { ...this.formDataService.getFormData() };
+    this.dataService.sendRequestWithFormData(formData).subscribe(
+      (res) => {
+        console.log(formData);
+        this.formDataRes = res;
+        console.log(this.formDataRes);
+      }
+    )
   }
 
   renderGraph(data: any): void {
@@ -286,5 +323,4 @@ export class GraphComponent implements OnInit {
       ]
     };
   }
-
 }
