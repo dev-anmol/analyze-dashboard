@@ -88,15 +88,11 @@ export class GraphComponent implements OnInit {
   updateFormData(field: string, value: any) {
     const formData = this.formDataService.getFormData();
 
-    if (field === 'startMonth') {
-      const formattedDate = formatDate(value, 'dd/MM/yyyy', 'en-US');
+    if (field === 'startMonth' || field === 'endMonth') {
+      const formattedDate = formatDate(value, 'yyyy-MM-dd', 'en-US');
       formData[field] = formattedDate;
     }
-    else if (field === 'endMonth') {
-      const formattedDate = formatDate(value, 'dd/MM/yyyy', 'en-US');
-      formData[field] = formattedDate;
-
-    } else if (Array.isArray(value)) {
+    else if (Array.isArray(value)) {
       formData[field] = value;
     }
     else {
@@ -121,13 +117,13 @@ export class GraphComponent implements OnInit {
         this.isError = true;
       }
     );
-    // const formData = {...this.formDataService.getFormData()};
-    // this.dataService.sendRequestWithFormData(formData).subscribe(
-    //   (data) => {
-    //     this.formDataRes = data;
-    //     console.log(this.formDataRes);        
-    //   } 
-    // )
+    const formData = {...this.formDataService.getFormData()};
+    this.dataService.sendRequestWithFormData(formData).subscribe(
+      (data) => {
+        this.formDataRes = data;
+        console.log(this.formDataRes);        
+      } 
+    )
     this.resetFields();
   }
   fetchFormData(): void {
