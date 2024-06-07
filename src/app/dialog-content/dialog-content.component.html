@@ -32,14 +32,14 @@
       <div class="col-sm-12">
         <div class="col-sm-12">
           <label>Facility</label>
-          <select class="form-select" [(ngModel)]="PFacility" (change)="updateFormData('Facility', PFacility)">
+          <select class="form-select" [(ngModel)]="PFacility" (change)="updateFormData('PFacility', PFacility)">
             <option value="" class="" selected="selected">Select</option>
             <option label="Test Facility" value="number:1">Test Facility</option>
           </select>
         </div>
         <div class="col-sm-12 mt-3">
           <label>Device</label>
-          <select class="form-select" [(ngModel)]="PDevice" (change)="updateFormData('Device', PDevice)">
+          <select class="form-select" [(ngModel)]="PDevice" (change)="updateFormData('PDevice', PDevice)">
             <option value="" class="" selected="selected">Select</option>
             <input type="text" class="form-check-input">
           </select>
@@ -52,7 +52,7 @@
         </div>
         <div class="col-sm-12 mt-3">
           <label>Graph Type</label>
-          <select class="form-select" [(ngModel)]="PGraphType" (change)="updateFormData('Graph Type', PGraphType)">
+          <select class="form-select" [(ngModel)]="PGraphType" (change)="updateFormData('PgraphType', PGraphType)">
             <option value="" class="form-select" style="display: none;" selected="selected">Select</option>
             <option value="Line">Line</option>
             <option value="Area">Area</option>
@@ -65,7 +65,7 @@
         <div class="col-sm-12 mt-3">
           <label for="">Plot Axis</label>
           <select name="" id="" class="form-select" [(ngModel)]="PPlotAxis"
-            (change)="updateFormData('Plot Axis', PPlotAxis)">
+            (change)="updateFormData('PplotAxis', PPlotAxis)">
             <option value="" style="display:none;" class="" selected="selected">Select</option>
             <option value="Primary Y (Y1)">Primary Y (Y1)</option>
             <option value="Secondary Y (Y2)">Secondary Y (Y2)</option>
@@ -76,21 +76,21 @@
       <div class="col-sm-12">
         <div class="col-sm-12">
           <label>Facility</label>
-          <select class="form-select" [(ngModel)]="BFacility" (change)="updateFormData('Facility', BFacility)">
+          <select class="form-select" [(ngModel)]="BFacility" (change)="updateFormData('BFacility', BFacility)">
             <option value="" class="" style="display: none;" selected="selected">Select</option>
             <option label="Test Facility" value="number:1">Test Facility</option>
           </select>
         </div>
         <div class="col-sm-12 mt-3">
           <label>Device</label>
-          <select class="form-select" [(ngModel)]="BDevice" (change)="updateFormData('Facility', BDevice)">
+          <select class="form-select" [(ngModel)]="BDevice" (change)="updateFormData('BDevice', BDevice)">
             <option value="" class="" style="display: none;" selected="selected">Select</option>
             <input type="text" class="form-check-input">
           </select>
         </div>
         <div class="col-sm-12 mt-3">
           <label>Benchmark (ploted as line graph)</label>
-          <select class="form-select" [(ngModel)]="BBenchMark" (change)="updateFormData('Benchmark', BBenchMark)">
+          <select class="form-select" [(ngModel)]="BBenchMark" (change)="updateFormData('BBenchmark', BBenchMark)">
             <option value="" class="" style="display: none;" selected="selected">Select</option>
             <input type="text" class="form-check-input">
           </select>
@@ -98,7 +98,7 @@
         <div class="col-sm-12 mt-3">
           <label for="">Benchmark Plot Axis</label>
           <select name="" id="" class="form-select" [(ngModel)]="BPlotAxis"
-            (change)="updateFormData('Benchmark PA', BPlotAxis)">
+            (change)="updateFormData('BBenchmarkPA', BPlotAxis)">
             <option value="Primary Y (Y1)">Primary Y (Y1)</option>
             <option value="Secondary Y (Y2)">Secondary Y (Y2)</option>
           </select>
@@ -108,28 +108,28 @@
       <div class="col-sm-12">
         <div class="col-sm-12">
           <label>Facility</label>
-          <select class="form-select" [(ngModel)]="SFacility" (change)="updateFormData('Facility', SFacility)">
+          <select class="form-select" [(ngModel)]="SFacility" (change)="updateFormData('SFacility', SFacility)">
             <option value="" class="" style="display: none;" selected="selected">Select</option>
             <option label="Test Facility" value="number:1">Test Facility</option>
           </select>
         </div>
         <div class="col-sm-12 mt-3">
           <label>Device</label>
-          <select class="form-select" [(ngModel)]="SDevice" (change)="updateFormData('Device', SDevice)">
+          <select class="form-select" [(ngModel)]="SDevice" (change)="updateFormData('SDevice', SDevice)">
             <option value="" class="" style="display: none;" selected="selected">Select</option>
             <input type="text" class="form-check-input">
           </select>
         </div>
         <div class="col-sm-12 mt-3">
           <label>Parameter</label>
-          <select class="form-select" [(ngModel)]="SParameter" (change)="updateFormData('Parameter', SParameter)">
+          <select class="form-select" [(ngModel)]="SParameter" (change)="updateFormData('SParameter', SParameter)">
             <option value="" class="" selected="selected">Select</option>
             <input type="text" class="form-check-input">
           </select>
         </div>
         <div class="col-sm-12 mt-3">
           <label>Graph Type</label>
-          <select class="form-select" [(ngModel)]="SGraphType" (change)="updateFormData('Graph Type', SGraphType)">
+          <select class="form-select" [(ngModel)]="SGraphType" (change)="updateFormData('SgraphType', SGraphType)">
             <option value="" class="" selected="selected">Select</option>
             <option value="Line">Line</option>
             <option value="Area">Area</option>
@@ -142,7 +142,7 @@
         <div class="col-sm-12 mt-3">
           <label for="">Plot Axis</label>
           <select name="" id="" class="form-select" [(ngModel)]="SPlotAxis"
-            (change)="updateFormData('Plot Axis', SPlotAxis)">
+            (change)="updateFormData('SplotAxis', SPlotAxis)">
             <option value="Primary Y (Y1)">Primary Y (Y1)</option>
             <option value="Secondary Y (Y2)">Secondary Y (Y2)</option>
           </select>
@@ -151,14 +151,14 @@
       }@else if (radioValue==='KPI') {
       <div class="col-sm-12">
         <label>Facility</label>
-        <select class="form-select" [(ngModel)]="KFacility" (change)="updateFormData('Facility', KFacility)">
+        <select class="form-select" [(ngModel)]="KFacility" (change)="updateFormData('KFacility', KFacility)">
           <option value="" class="" selected="selected">Select</option>
           <option label="Test Facility" value="number:1">Test Facility</option>
         </select>
       </div>
       <div class="col-sm-12">
         <label>KPI</label>
-        <select class="form-select" [(ngModel)]="Kpi" (change)="updateFormData('KPI', Kpi)">
+        <select class="form-select" [(ngModel)]="Kpi" (change)="updateFormData('Kpi', Kpi)">
           <option value="" class="" selected="selected">Select</option>
         </select>
       </div>
